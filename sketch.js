@@ -48,8 +48,9 @@ function draw() {
   background(0);
   paper.display();
  // groundObject.display();
-  dustbinObject.display();
-  paperObject.display();
+  //dustbinObject.display();
+  //paperObject.display();
+
   rect(box.position.x,box.position.y,20,100)
   rect(box2.position.x,box2.position.y,20,100)
   rect(ground.position.x,ground.position.y,800,20)
