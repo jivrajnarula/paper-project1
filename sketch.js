@@ -3,28 +3,40 @@ const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
-
-var box1, box2, box3;
-
+var box, box2;
+var engine, world, paper;
+var ground;
+var paperIMG, dustbinIMG;
 function preload()
 {
-	
+	paperIMG=loadImage("paper.png")
+	dustbinIMG=loadImage("dustbingreen.png")
 }
 
 function setup() {
-	createCanvas(800, 700);
+	createCanvas(800,700);
 
 
 	engine = Engine.create();
 	world = engine.world;
 	
-	box1=createSprite(20,200,20,200)
-  box2=createSprite(10,200,100,20)
-	box3=createSprite(50,200,100,20)
+	
+  //Create the Bodies Here.
+ paper = new PaperClass(50,660,20)
+ var goptions={
+   isStatic:true
+ }
+ ground=Bodies.rectangle(400,690,800,20,goptions)
+ World.add(world,ground)
 
-	//Create the Bodies Here.
-
-
+ var boptions={
+   isStatic:true
+ }
+ box=Bodies.rectangle(500,630,20,100,boptions)
+ World.add(world,box)
+ 
+ box2=Bodies.rectangle(700,630,20,100,boptions)
+ World.add(world,box2)
 
 	Engine.run(engine);
   
@@ -34,17 +46,21 @@ function setup() {
 function draw() {
   rectMode(CENTER);
   background(0);
-  box1.display();
-  box2.display();
-  box3.display();
- 
+  paper.display();
+ // groundObject.display();
+  dustbinObject.display();
+  paperObject.display();
+  rect(box.position.x,box.position.y,20,100)
+  rect(box2.position.x,box2.position.y,20,100)
+  rect(ground.position.x,ground.position.y,800,20)
+
 
  
 }
 function keyPressed() {
-     if(keycode === "UP_ARROW"){
+     if(keyCode === UP_ARROW){
 
-		Matter.Body.applyForce(paperObject.body,paperObject.body.position,{x:85,y:-85});
+		Matter.Body.applyForce(paper.body,paper.body.position,{x:60,y:-60});
 
   }
 }
